@@ -30,9 +30,7 @@ public class PrenotazioniService {
                 .orElseThrow(() -> new NotFoundException("Dipendente  non trovato"));
         Viaggio viaggio = viR.findById(viaggio_Id)
                 .orElseThrow(() -> new NotFoundException("Viaggio  non trovato"));
-
         Prenotazione newPrenotazione = new Prenotazione(dipendente, viaggio, body.note(), body.data_di_richiesta());
-
 
         return this.prR.save(newPrenotazione);
     }

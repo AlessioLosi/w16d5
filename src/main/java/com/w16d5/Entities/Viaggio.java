@@ -20,12 +20,14 @@ public class Viaggio {
     @Setter(AccessLevel.NONE)
     private Long id;
     private String destinazione;
-    private LocalDate data;
+    private LocalDate dataInizio;
+    private LocalDate dataFine;
     private StatoViaggio statoViaggio;
 
-    public Viaggio(String destinazione, LocalDate data, StatoViaggio statoViaggio) {
+    public Viaggio(String destinazione, LocalDate dataInizio, LocalDate dataFine, StatoViaggio statoViaggio) {
         this.destinazione = destinazione;
-        this.data = data;
+        this.dataInizio = dataInizio;
+        this.dataFine = dataFine;
         this.statoViaggio = statoViaggio;
     }
 }

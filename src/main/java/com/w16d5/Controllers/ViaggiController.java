@@ -51,7 +51,7 @@ public class ViaggiController {
 
     // 4. PUT http://localhost:3001/viaggi/{viaggiId} (+ req.body)
     @PutMapping("/{viaggiId}")
-    public Viaggio findByIdAndUpdate(@PathVariable Long viaggiId, @RequestBody @Validated NewViaggioDTO body, BindingResult validationResult) {
+    public Viaggio updateStato(@PathVariable Long viaggiId, @RequestBody @Validated NewViaggioDTO body, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             validationResult.getAllErrors().forEach(System.out::println);
             throw new BadRequestException("Ci sono stati errori nel payload!");

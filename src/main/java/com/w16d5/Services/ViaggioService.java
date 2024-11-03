@@ -20,7 +20,7 @@ public class ViaggioService {
     public Viaggio save(NewViaggioDTO body) {
 
 
-        Viaggio newViaggio = new Viaggio(body.destinazione(), body.data(), body.statoViaggio());
+        Viaggio newViaggio = new Viaggio(body.destinazione(), body.dataInizio(), body.dataFine(), body.statoViaggio());
 
 
         return this.viR.save(newViaggio);
