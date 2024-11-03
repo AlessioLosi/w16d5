@@ -24,16 +24,22 @@ public class PrenotazioniService {
     @Autowired
     private DipendentiRepository diR;
 
-    public Prenotazione save(NewPrenotazioneDTO body, Long dipendente_Id, Long viaggio_Id) {
+    public Prenotazione save(NewPrenotazioneDTO body, Long dipendente_Id, Long viaggio_Id) throws Exception {
 
         Dipendente dipendente = diR.findById(dipendente_Id)
                 .orElseThrow(() -> new NotFoundException("Dipendente  non trovato"));
-        Viaggio viaggio = viR.findById(viaggio_Id)
-                .orElseThrow(() -> new NotFoundException("Viaggio  non trovato"));
+        Viaggio viaggio = viR.findById(viaggio_Id).orElseThrow(() -> new NotFoundException("Viaggio  non trovato"));
+
         Prenotazione newPrenotazione = new Prenotazione(dipendente, viaggio, body.note(), body.data_di_richiesta());
 
         return this.prR.save(newPrenotazione);
+
     }
+
+    // public Prenotazione check(Dipendente dipendente, Viaggio viaggio) throws Exception {
+    //     if (dipendente == null || viaggio == null) throw new Exception();
+    //     return check(dipendente, viaggio);
+    // }
 
     public Prenotazione findById(Long prenotazioneId) {
         return this.prR.findById(prenotazioneId).orElseThrow(() -> new NotFoundException("non trovata la prenotazione con id" + prenotazioneId));

@@ -30,7 +30,7 @@ public class PrenotazioniController {
     // 2. POST http://localhost:3001/prenotazioni (+ req.body) --> 201
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Prenotazione save(@RequestBody @Validated NewPrenotazioneDTO body, BindingResult validationResult) {
+    public Prenotazione save(@RequestBody @Validated NewPrenotazioneDTO body, BindingResult validationResult) throws Exception {
 
         if (validationResult.hasErrors()) {
             String message = validationResult.getAllErrors().stream().map(objectError -> objectError.getDefaultMessage())
@@ -49,8 +49,8 @@ public class PrenotazioniController {
     }
 
 
-    // 4. PUT http://localhost:3001/prenotazioni/{dipententiId} (+ req.body)
-    // @PutMapping("/{prenotazioniId}")
+    //4. PUT http://localhost:3001/prenotazioni/{dipententiId} (+ req.body)
+    //@PutMapping("/{prenotazioniId}")
     // Prenotazione findByIdAndUpdate(@PathVariable Long prenotazioniId, @RequestBody @Validated NewPrenotazioneDTO body, BindingResult validationResult) {
     //    if (validationResult.hasErrors()) {
     //         validationResult.getAllErrors().forEach(System.out::println);
