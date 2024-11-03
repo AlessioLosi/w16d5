@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.stream.Collectors;
 
@@ -65,5 +66,12 @@ public class DipendentiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable Long dipendentiId) {
         this.dipendentiService.findByIdAndDelete(dipendentiId);
+    }
+
+    // 6. PATCH http://localhost:3001/dipendenti/{dipendentiId}/avatar
+    @PatchMapping("/{dipendentiId}/avatar")
+    public String uploadAvatar(@RequestParam("avatar") MultipartFile file, Long dipendentiId) {
+
+        return this.dipendentiService.uploadAvatar(file, dipendentiId);
     }
 }

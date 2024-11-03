@@ -1,5 +1,7 @@
 package com.w16d5.Services;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.w16d5.Entities.Dipendente;
 import com.w16d5.Exceptions.BadRequestException;
 import com.w16d5.Exceptions.NotFoundException;
@@ -11,11 +13,16 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 public class DipendentiService {
     @Autowired
     private DipendentiRepository diR;
+    @Autowired
+    private Cloudinary cloudinary;
 
     public Dipendente save(NewDipendenteDTO body) {
         this.diR.findByUsername(body.username()).ifPresent(
@@ -67,5 +74,21 @@ public class DipendentiService {
         if (size > 100) size = 100;
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return this.diR.findAll(pageable);
+    }
+
+    public String uploadAvatar(MultipartFile file, Long id_dipendente) {
+        Dipendente dipendente = this.findById(id_dipendente);
+        String url = null;
+        try {
+            url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        } catch (IOException e) {
+            throw new BadRequestException("Ci sono stati problemi con l'upload del file!");
+        }
+        dipendente.setAvatarURL(url);
+        this.diR.save(dipendente);
+
+        return url;
+
+
     }
 }
