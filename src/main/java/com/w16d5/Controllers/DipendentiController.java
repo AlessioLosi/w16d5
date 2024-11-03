@@ -43,14 +43,14 @@ public class DipendentiController {
 
 
     // 3. GET http://localhost:3001/dipendenti/{dipendentiId}
-    @GetMapping("/{userId}")
+    @GetMapping("/{dipendentiId}")
     public Dipendente findById(@PathVariable Long dipendentiId) {
         return this.dipendentiService.findById(dipendentiId);
     }
 
 
     // 4. PUT http://localhost:3001/dipendenti/{dipententiId} (+ req.body)
-    @PutMapping("/{userId}")
+    @PutMapping("/{dipendentiId}")
     public Dipendente findByIdAndUpdate(@PathVariable Long dipendentiId, @RequestBody @Validated NewDipendenteDTO body, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             validationResult.getAllErrors().forEach(System.out::println);
@@ -61,7 +61,7 @@ public class DipendentiController {
 
 
     // 5. DELETE http://localhost:3001/dipendenti/{dipendentiId} --> 204
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/{dipendentiId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable Long dipendentiId) {
         this.dipendentiService.findByIdAndDelete(dipendentiId);

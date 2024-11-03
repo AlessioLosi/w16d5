@@ -7,8 +7,6 @@ import java.time.LocalDate;
 
 public record NewViaggioDTO(@NotEmpty(message = "La destinazione è obbligatoria!")
                             String destinazione,
-                            @NotEmpty(message = "La data è obbligatoria")
                             LocalDate data,
-                            @NotEmpty(message = "Lo stato del viaggio è obbligatorio")
                             StatoViaggio statoViaggio) {
 }

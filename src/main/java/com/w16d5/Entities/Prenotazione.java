@@ -14,10 +14,10 @@ import java.time.LocalDate;
 public class Prenotazione {
     @ManyToOne
     @JoinColumn(name = "dipendente_id")
-    Dipendente dipendente;
+    private Dipendente dipendente_id;
     @ManyToOne
     @JoinColumn(name = "viaggio_id")
-    Viaggio viaggio;
+    private Viaggio viaggio_id;
     @Id
     @GeneratedValue
     @Setter(AccessLevel.NONE)
@@ -25,10 +25,10 @@ public class Prenotazione {
     private String note;
     private LocalDate datarichiesta;
 
-    public Prenotazione(String note, LocalDate datarichiesta, Dipendente dipendente, Viaggio viaggio) {
+    public Prenotazione(Dipendente dipendente_id, Viaggio viaggio_id, String note, LocalDate datarichiesta) {
+        this.dipendente_id = dipendente_id;
+        this.viaggio_id = viaggio_id;
         this.note = note;
         this.datarichiesta = datarichiesta;
-        this.dipendente = dipendente;
-        this.viaggio = viaggio;
     }
 }

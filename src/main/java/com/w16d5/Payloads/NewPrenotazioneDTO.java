@@ -1,11 +1,16 @@
 package com.w16d5.Payloads;
 
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public record NewPrenotazioneDTO(
         String note,
-        @NotEmpty(message = "La data di riciesta è obbligatoria")
-        LocalDate data_di_richiesta) {
+        LocalDate data_di_richiesta,
+
+        @NotNull(message = "L'ID del dipendente è obbligatorio")
+        Long dipendente_Id,
+
+        @NotNull(message = "L'ID del viaggio è obbligatorio")
+        Long viaggio_Id) {
 }
